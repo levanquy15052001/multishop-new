@@ -58,40 +58,11 @@ Route::name('admin.')->prefix('admin')->group(function() {
     
  
     Route::group(['middleware' => 'adminauth'], function () {
-        Route::get('/demoAdmin',[AdminController::class,'demoAdmin'])->name('demoAdmin');
-         //Order Admin
-        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-        Route::get('/order',[OrderAdminController::class,'index'])->name('order');
-        Route::get('/order-confirm',[OrderAdminController::class,'store'])->name('order.confirm');
-        Route::get('/order-store',[OrderAdminController::class,'store'])->name('store');
-        Route::get('/update-order/{id}',[OrderAdminController::class,'update_order'])->name('update.order');
-        Route::get('/add-order/{id}/{user}',[OrderAdminController::class,'add_order'])->name('add.order');
-        Route::get('/create-order',[OrderAdminController::class,'create'])->name('order.create');
-        Route::post('/information-order',[OrderAdminController::class,'information'])->name('order.information');
-        Route::post('/save-information-order',[OrderAdminController::class,'save_information'])->name('order.information.save');
-        Route::get('/order-offline/{id}',[OrderAdminController::class,'order_offline'])->name('order.offline');
-        Route::get('/add-order-offline',[OrderAdminController::class,'add_order_offline'])->name('add.order.offline');
-        Route::get('/confirm-order-offline/{id}/{action}',[OrderAdminController::class,'confirm_order_offline'])->name('confirm.order.offline');
-        Route::get('/order-offline-history',[OrderAdminController::class,'order_offline_history'])->name('order.offline.history');
-        Route::get('/statistical',[OrderAdminController::class,'statistical'])->name('statistical');
-
-        //Product
-        Route::get('/all-products',[ProductController::class,'index'])->name('all_products');
-        Route::get('/add-products',[ProductController::class,'add'])->name('add_products');
-        Route::post('/add-products',[ProductController::class,'store'])->name('store.product');
-        Route::get('/edit/{id}',[ProductController::class,'show'])->name('edit');
-        Route::post('/edit-products/{id}',[ProductController::class,'update'])->name('update.product');
-
-
-       
-        // Categories
-        Route::name('categories.')->prefix('categories')->group(function() {
-                Route::get('/',[CategoriesAdminController::class,'index'])->name('all');
-                Route::get('/add',[CategoriesAdminController::class,'get_add'])->name('add');
-                Route::post('/add',[CategoriesAdminController::class,'store'])->name('store');
-                Route::get('/edit/{id}',[CategoriesAdminController::class,'show'])->name('show');
-                Route::post('/edit/{id}',[CategoriesAdminController::class,'update'])->name('update');   
-        });
-       
+        
     });
+});
+
+
+Route::get('/admin_dark',function()  {
+    return view('dasboard.pages.home');    
 });
