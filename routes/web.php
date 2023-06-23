@@ -56,10 +56,14 @@ Route::name('admin.')->prefix('admin')->group(function() {
  
     Route::group(['middleware' => 'adminauth'], function () {
         
+        Route::get('/',function(){
+            $title ="Dashboard";
+            return  view('admin.pages.home',compact('title'));
+        });
+        Route::get('/home',function(){
+            $title ="Dashboard";
+            return  view('admin.pages.home',compact('title'));
+        });
     });
 });
 
-
-Route::get('/admin_dark',function()  {
-    return view('dasboard.pages.home');    
-});

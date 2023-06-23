@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function getLogin(){
 
-       return view('admin.login_admin');
+       return view('admin.pages.login');
 
     }
  
@@ -37,7 +37,7 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.page.dashboard');
     }
 
     public function demoAdmin()
