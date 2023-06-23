@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\OrderController as OrderAdminController;
-use App\Http\Controllers\Admin\CategoriesAdminController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LoginController;
