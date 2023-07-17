@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\LoginController;
@@ -10,16 +12,6 @@ use App\Http\Controllers\User\OrderController;
 use Illuminate\Support\Facades\Route;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 /// User
 // Route::get('/send-mail', [HomeController::class, 'send_mail'])->name('send_mail');
 Route::get('/',[HomeController::class,'index'])->name('index');
@@ -45,25 +37,29 @@ Route::group(['middleware' => ['checkuser']], function () {
 
 
 
-///Admin
+// ///Admin
 
-Route::name('admin.')->prefix('admin')->group(function() {
+Route::name('admin.')->prefix('admins')->group(function() {
 
     Route::get('/login', [AdminController::class, 'getLogin'])->name('login');
     Route::post('/login', [AdminController::class, 'postLogin'])->name('login.post');
     Route::get('/logout',[AdminController::class,'adminLogout'])->name('logout');
-    
- 
+
     Route::group(['middleware' => 'adminauth'], function () {
-        
-        Route::get('/',function(){
-            $title ="Dashboard";
-            return  view('admin.pages.home',compact('title'));
-        });
-        Route::get('/home',function(){
-            $title ="Dashboard";
-            return  view('admin.pages.home',compact('title'));
+
+        Route::get('/',[AdminHomeController::class,'index'])->name('index');
+
+        //Categories
+        Route::name('categories.')->prefix('categories')->group(function() {
+
+            Route::get('/',[CategoriesController::class,'index'])->name('index');
+            Route::get('/create',[CategoriesController::class,'create'])->name('create');
+            Route::get('/edit',[CategoriesController::class,'edit'])->name('edit');
+            Route::get('/destroy',[CategoriesController::class,'destroy'])->name('destroy');
+            
         });
     });
+
+ 
 });
 

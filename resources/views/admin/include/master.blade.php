@@ -21,6 +21,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle"  href="{{asset('admin/assets/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
+  <link id="pagestyle"  href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" />
 </head>
 <body class="g-sidenav-show  bg-gray-200">
     <!-- Menu -->
@@ -32,6 +33,7 @@
         @include('admin.include.navbar')
     <!-- End Navbar -->
     <div class="container-fluid py-4">
+
         @yield('admin_dashboard')    
       
     </div>

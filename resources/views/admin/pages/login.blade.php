@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('admin/assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('admin/assets/img/favicon.png')}}">
   <title>
-    Material Dashboard 2 by Creative Tim
+   Login MultiShop Admin
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -21,6 +21,11 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('admin/assets/css/material-dashboard.css?v=3.1.0')}}" rel="stylesheet" />
   <link id="pagestyle" href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" />
+  <style>
+    .error{
+      color: red;
+    }
+  </style>
 </head>
 
 <body class="bg-gray-200">
@@ -37,12 +42,13 @@
                 </div>
               </div>
               <div class="card-body">
-                <form role="form" action="{{route('admin.login.post')}}" method="POST" class="text-start">
+                <form id="myform" role="form" action="{{route('admin.login.post')}}" method="POST" class="text-start">
                     @csrf
                   <div class="input-group input-group-outline my-3">
                     <label class="form-label">Email</label>
                     <input type="text" class="form-control" name="email">
                   </div>
+                  <span id="email"></span>
                     @error('email')
                         <span class=" text-danger d-flex">{{ $message }}</span>
                     @enderror
@@ -50,6 +56,7 @@
                     <label class="form-label">Password</label>
                     <input type="password" class="form-control" name="password">
                   </div>
+                  <span id="password"></span>
                     @error('password')
                         <span class=" text-danger d-flex">{{ $message }}</span>
                     @enderror
@@ -57,6 +64,13 @@
                     <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Login in</button>
                   </div>
                 </form>
+                @if (\Session::has('waring'))
+                    <div class="alert alert-danger text-white ">
+                     
+                      {!! \Session::get('waring') !!}
+                        
+                    </div>
+                @endif
               </div>
             </div>
           </div>
@@ -96,8 +110,47 @@
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('admin/assets/js/material-dashboard.min.js?v=3.1.0')}}"></script>
+  <script src="{{asset('js/jquery.min.js')}}"></script>
+  <script src="{{asset('js/jquery.validate.js')}}"></script>
+  <script>
+    $(document).ready(function () {
+  
+        $('#myform').validate({ // initialize the plugin
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            errorPlacement: function(error, element) {
+            //Custom position: first name
+            if (element.attr("name") == "email" ) {
+                $("#email").text(error);
+                console.log(error);
+            }
+            //Custom position: second name
+            else if (element.attr("name") == "password" ) {
+                $("#password").text(error);
+            }
+            // Default position: if no match is met (other fields)
+            else {
+                    error.append($('.errorTxt span'));
+                }
+            },
+            submitHandler: function(form) {
+                form.submit();
+              } 
+        });
+
+    });
+  </script>
 </body>
 
 </html>

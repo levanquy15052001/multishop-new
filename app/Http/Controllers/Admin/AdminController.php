@@ -22,7 +22,7 @@ class AdminController extends Controller
  
         if(auth()->guard('admin')->attempt(['email' => $request->email,  'password' => $request->password])){
               
-                    return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.index');
 
         }else {
             return redirect()->back()->with('waring', 'Account does not exist in the system');
@@ -37,11 +37,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.page.dashboard');
-    }
-
-    public function demoAdmin()
-    {
-         return view('admin.demo');
+        // return view('admin.page.dashboard');
     }
 }
